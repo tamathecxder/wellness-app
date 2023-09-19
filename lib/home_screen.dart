@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wellness_app/model/feeling.dart';
-import 'package:wellness_app/screen/consulting_screen.dart';
+import 'package:wellness_app/models/feeling.dart';
+import 'package:wellness_app/screens/consulting_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
