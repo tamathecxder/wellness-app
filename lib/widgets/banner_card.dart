@@ -1,18 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:wellness_app/theme/style.dart';
 
 class BannerCard extends StatelessWidget {
-  Color backgroundColor;
-  Color accentColor;
-  Color textColor;
-  Color mainTextColor;
-  String? imagePath;
-  String title;
-  String subtitle;
-  String? time;
-  String buttonText;
-  IconData buttonIcon;
+  final Color backgroundColor;
+  final Color accentColor;
+  final Color textColor;
+  final Color mainTextColor;
+  final String? imagePath;
+  final String title;
+  final String subtitle;
+  final String? time;
+  final String buttonText;
+  final IconData buttonIcon;
 
   BannerCard({
     super.key,
