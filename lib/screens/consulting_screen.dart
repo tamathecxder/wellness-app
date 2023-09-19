@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
-import 'package:wellness_app/widget/banner_card.dart';
+import 'package:wellness_app/widgets/banner_card.dart';
 
 class ConsultingScreen extends StatelessWidget {
   const ConsultingScreen({super.key});

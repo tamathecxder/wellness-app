@@ -4,9 +4,9 @@ import 'package:wellness_app/screens/consulting_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:wellness_app/widget/banner_card.dart';
-import 'package:wellness_app/widget/custom_appbar.dart';
-import 'package:wellness_app/widget/feeling_item.dart';
+import 'package:wellness_app/widgets/banner_card.dart';
+import 'package:wellness_app/widgets/custom_appbar.dart';
+import 'package:wellness_app/widgets/feeling_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
