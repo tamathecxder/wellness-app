@@ -1,10 +1,22 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:wellness_app/models/consultant.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
 import 'package:wellness_app/widgets/banner_card.dart';
+import 'package:wellness_app/widgets/consultant_item.dart';
 
-class ConsultingScreen extends StatelessWidget {
+class ConsultingScreen extends StatefulWidget {
   const ConsultingScreen({super.key});
+
+  @override
+  State<ConsultingScreen> createState() => _ConsultingScreenState();
+}
+
+class _ConsultingScreenState extends State<ConsultingScreen> {
+  String selectedValue = 'All Sessions';
 
   @override
   Widget build(BuildContext context) {
@@ -27,205 +39,157 @@ class ConsultingScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 10,
-              children: [
-                Text(
-                  'All Sessions',
-                  style: CustomStyle.defaultTextStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
+            InkWell(
+              onTap: () {
+                _showDropdown(context);
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Colors.transparent,
                 ),
-                const Icon(
-                  Icons.keyboard_arrow_down,
+                padding: EdgeInsets.all(10.0),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 10,
+                  children: [
+                    Text(
+                      selectedValue,
+                      style: CustomStyle.defaultTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.keyboard_arrow_down,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-            IconButton(
-              onPressed: () {},
+            PopupMenuButton<String>(
               icon: const Icon(Icons.sort),
-            )
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                return Constants.choices.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
+            ),
           ],
         ),
         const SizedBox(
           height: 20,
         ),
-        Container(
-          width: 325.0,
-          height: 185,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: AppColors.secondaryColor,
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20.0,
-                  horizontal: 15.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const CircleAvatar(
-                                radius: 22,
-                                backgroundColor: AppColors.primaryColor,
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundImage:
-                                      AssetImage('assets/images/1.jpg'),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Sahana V',
-                                    style:
-                                        CustomStyle.defaultTextStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 3,
-                                  ),
-                                  Text(
-                                    'Msc in Clinical Psychology',
-                                    style: CustomStyle.descriptionTextStyle
-                                        .copyWith(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                            child: Divider(),
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Wrap(
-                                  spacing: 8,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.calendar_month_outlined,
-                                      size: 12,
-                                      color: AppColors.darkGrayColor,
-                                    ),
-                                    Text(
-                                      '31st March ‘22',
-                                      style: CustomStyle.descriptionTextStyle
-                                          .copyWith(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Wrap(
-                                  spacing: 8,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.timer_outlined,
-                                      size: 12,
-                                      color: AppColors.darkGrayColor,
-                                    ),
-                                    Text(
-                                      '7:30 PM - 8:30 PM',
-                                      style: CustomStyle.descriptionTextStyle
-                                          .copyWith(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 120,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Reschedule',
-                                    style:
-                                        CustomStyle.defaultTextStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 36,
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  minimumSize: const Size(50, 30),
-                                  tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  alignment: Alignment.centerLeft,
-                                ),
-                                child: Text(
-                                  'Join Now',
-                                  style: CustomStyle.defaultTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                  ],
-                ),
+        ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          itemCount: consultantList.length,
+          itemBuilder: (context, index) {
+            Consultant list = consultantList[index];
+            String formattedDate =
+                DateFormat("d MMMM ''yy").format(list.datetime);
+            String formattedStartTime =
+                DateFormat("h:mm a").format(list.datetime);
+            String formattedEndTime = DateFormat("h:mm a")
+                .format(list.datetime.add(const Duration(hours: 1)));
+            String formattedDateTimeRange =
+                '$formattedStartTime - $formattedEndTime';
+
+            return Container(
+              margin: const EdgeInsets.only(
+                bottom: 12,
               ),
-            ],
-          ),
+              child: ConsultantItem(
+                name: list.name,
+                degree: list.degree,
+                imageUrl: list.imageUrl,
+                date: formattedDate,
+                time: formattedDateTimeRange,
+              ),
+            );
+          },
         ),
       ],
     );
+  }
+
+  void _showDropdown(BuildContext context) {
+    final List<String> options = [
+      'Session 1',
+      'Session 2',
+      'Session 3',
+      'Session 4',
+      'All Sessions',
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: 260,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Center(
+                    child: Text(
+                      'Filter By Session',
+                      style: CustomStyle.defaultTextStyle.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: options.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(options[index]),
+                      onTap: () {
+                        setState(() {
+                          selectedValue =
+                              options[index]; // Perbarui teks yang dipilih
+                        });
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class Constants {
+  static const String FirstItem = 'Latest';
+  static const String SecondItem = 'Oldest';
+
+  static const List<String> choices = <String>[
+    FirstItem,
+    SecondItem,
+  ];
+}
+
+void choiceAction(String choice) {
+  if (choice == Constants.FirstItem) {
+    print('Latest clicked');
+  } else if (choice == Constants.SecondItem) {
+    print('Oldest clicked');
   }
 }
