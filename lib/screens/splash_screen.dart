@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wellness_app/screens/home_screen.dart';
+import 'package:wellness_app/screens/initial_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => HomeScreen(),
+          pageBuilder: (_, __, ___) => const InitialScreen(),
           transitionsBuilder: (_, animation, __, child) {
             const begin = Offset(1.0, 0.0);
             const end = Offset.zero;
