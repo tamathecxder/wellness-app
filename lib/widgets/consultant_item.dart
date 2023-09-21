@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
+import 'package:wellness_app/widgets/primary_button.dart';
 
 class ConsultantItem extends StatelessWidget {
   final String name;
@@ -140,24 +141,7 @@ class ConsultantItem extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Container(
-                              width: 120,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Reschedule',
-                                  style: CustomStyle.defaultTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            const PrimaryButton(title: 'Reschedule'),
                             const SizedBox(
                               width: 36,
                             ),
