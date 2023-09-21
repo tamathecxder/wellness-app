@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wellness_app/splash_screen.dart';
+import 'package:wellness_app/screens/splash_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wellness_app/home_screen.dart';
+import 'package:wellness_app/screens/home_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
 
 class SplashScreen extends StatefulWidget {

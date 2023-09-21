@@ -1,85 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wellness_app/models/feeling.dart';
-import 'package:wellness_app/screens/consulting_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:wellness_app/widgets/banner_card.dart';
-import 'package:wellness_app/widgets/custom_appbar.dart';
 import 'package:wellness_app/widgets/feeling_item.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeWidget(),
-    ConsultingScreen(),
-    Text(
-      'Profile Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
-    Text(
-      'About Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
-  ];
-
-  static const List<IconData> iconList = [
-    Icons.home_filled,
-    Icons.videocam_outlined,
-    Icons.chat_bubble_outline,
-    Icons.people_outline_outlined,
-  ];
-
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 16.0,
-              horizontal: 25.0,
-            ),
-            child: Column(
-              children: [
-                const CustomAppbar(),
-                _widgetOptions.elementAt(_selectedIndex),
-              ],
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        gapLocation: GapLocation.none,
-        height: 80,
-        icons: iconList,
-        activeIndex: _selectedIndex,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
-        onTap: (index) => _onItemTapped(index),
-        activeColor: AppColors.primaryColor,
-        inactiveColor: AppColors.darkGrayColor,
-      ),
-    );
-  }
-}
-
-class HomeWidget extends StatelessWidget {
-  const HomeWidget({
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
     super.key,
   });
 
