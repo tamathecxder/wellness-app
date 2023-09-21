@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellness_app/screens/community_screen.dart';
 import 'package:wellness_app/screens/consulting_screen.dart';
 import 'package:wellness_app/screens/home_screen.dart';
 import 'package:wellness_app/theme/colors.dart';
@@ -20,10 +21,7 @@ class _InitialScreenState extends State<InitialScreen> {
       'Profile Page',
       style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
     ),
-    Text(
-      'About Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
+    CommunityScreen(),
   ];
 
   static const List<IconData> iconList = [
