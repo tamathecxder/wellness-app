@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellness_app/screens/chat_screen.dart';
 import 'package:wellness_app/screens/community_screen.dart';
 import 'package:wellness_app/screens/consulting_screen.dart';
 import 'package:wellness_app/screens/home_screen.dart';
@@ -17,10 +18,7 @@ class _InitialScreenState extends State<InitialScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     ConsultingScreen(),
-    Text(
-      'Profile Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-    ),
+    ChatScreen(),
     CommunityScreen(),
   ];
 

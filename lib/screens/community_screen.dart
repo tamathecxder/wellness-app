@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellness_app/helpers/formatting.dart';
+import 'package:wellness_app/models/category.dart';
 import 'package:wellness_app/models/community.dart';
 import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
@@ -31,39 +32,31 @@ class _CommunityScreenState extends State<CommunityScreen> {
         const SizedBox(
           height: 20,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Wrap(
-            spacing: 12,
-            children: [
-              PrimaryButton(
-                title: 'Trending',
-                isActive: _isActive,
-                onTap: () {
-                  setState(() {
-                    _isActive = !_isActive;
-                  });
-                },
-              ),
-              PrimaryButton(
-                title: 'Relationship',
-                isActive: _isActive,
-                onTap: () {
-                  setState(() {
-                    _isActive = !_isActive;
-                  });
-                },
-              ),
-              PrimaryButton(
-                title: 'Self Care',
-                isActive: _isActive,
-                onTap: () {
-                  setState(() {
-                    _isActive = !_isActive;
-                  });
-                },
-              ),
-            ],
+        SizedBox(
+          height: 40,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemCount: categoryList.length,
+            itemBuilder: (context, index) {
+              final category = categoryList[index];
+
+              return Padding(
+                padding: const EdgeInsets.only(
+                  right: 12,
+                ),
+                child: PrimaryButton(
+                  title: category.title,
+                  isActive: category.isActive,
+                  onTap: () {
+                    setState(() {
+                      category.isActive = !category.isActive;
+                    });
+                  },
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(
