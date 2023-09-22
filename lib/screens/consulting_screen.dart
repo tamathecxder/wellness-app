@@ -20,102 +20,207 @@ class _ConsultingScreenState extends State<ConsultingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BannerCard(
-          backgroundColor: AppColors.secondaryColor,
-          accentColor: AppColors.primaryColor.withOpacity(0.2),
-          title: 'Upcomming Session',
-          subtitle: 'Sahana V, Msc in Clinical Psychology',
-          time: '7:30 PM - 8:30 PM',
-          buttonIcon: Icons.play_circle,
-          buttonText: 'Join Now',
-          textColor: AppColors.primaryColor,
-          mainTextColor: const Color(0xFF573926),
-        ),
-        const SizedBox(
-          height: 26,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                _showDropdown(context);
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.transparent,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth > 500) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: BannerCard(
+                  backgroundColor: AppColors.secondaryColor,
+                  accentColor: AppColors.primaryColor.withOpacity(0.2),
+                  title: 'Upcomming Session',
+                  subtitle: 'Sahana V, Msc in Clinical Psychology',
+                  time: '7:30 PM - 8:30 PM',
+                  buttonIcon: Icons.play_circle,
+                  buttonText: 'Join Now',
+                  textColor: AppColors.primaryColor,
+                  mainTextColor: const Color(0xFF573926),
                 ),
-                padding: EdgeInsets.all(10.0),
-                child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: 10,
-                  children: [
-                    Text(
-                      selectedValue,
-                      style: CustomStyle.defaultTextStyle.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+              ),
+              const SizedBox(
+                height: 26,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      _showDropdown(context);
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.transparent,
+                      ),
+                      padding: EdgeInsets.all(10.0),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 10,
+                        children: [
+                          Text(
+                            selectedValue,
+                            style: CustomStyle.defaultTextStyle.copyWith(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                          ),
+                        ],
                       ),
                     ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                    ),
-                  ],
-                ),
+                  ),
+                  PopupMenuButton<String>(
+                    icon: const Icon(Icons.sort),
+                    onSelected: choiceAction,
+                    itemBuilder: (BuildContext context) {
+                      return Constants.choices.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                  ),
+                ],
               ),
-            ),
-            PopupMenuButton<String>(
-              icon: const Icon(Icons.sort),
-              onSelected: choiceAction,
-              itemBuilder: (BuildContext context) {
-                return Constants.choices.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          itemCount: consultantList.length,
-          itemBuilder: (context, index) {
-            Consultant list = consultantList[index];
-            String formattedDate =
-                DateFormat("d MMMM ''yy").format(list.datetime);
-            String formattedStartTime =
-                DateFormat("h:mm a").format(list.datetime);
-            String formattedEndTime = DateFormat("h:mm a")
-                .format(list.datetime.add(const Duration(hours: 1)));
-            String formattedDateTimeRange =
-                '$formattedStartTime - $formattedEndTime';
+              const SizedBox(
+                height: 20,
+              ),
+              Wrap(
+                alignment: WrapAlignment.spaceAround,
+                spacing: 20, // Jarak antara dua konsultan dalam satu baris
+                children: consultantList.map((Consultant list) {
+                  String formattedDate =
+                      DateFormat("d MMMM ''yy").format(list.datetime);
+                  String formattedStartTime =
+                      DateFormat("h:mm a").format(list.datetime);
+                  String formattedEndTime = DateFormat("h:mm a")
+                      .format(list.datetime.add(const Duration(hours: 1)));
+                  String formattedDateTimeRange =
+                      '$formattedStartTime - $formattedEndTime';
 
-            return Container(
-              margin: const EdgeInsets.only(
-                bottom: 12,
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    child: ConsultantItem(
+                      name: list.name,
+                      degree: list.degree,
+                      imageUrl: list.imageUrl,
+                      date: formattedDate,
+                      time: formattedDateTimeRange,
+                    ),
+                  );
+                }).toList(),
               ),
-              child: ConsultantItem(
-                name: list.name,
-                degree: list.degree,
-                imageUrl: list.imageUrl,
-                date: formattedDate,
-                time: formattedDateTimeRange,
+            ],
+          );
+        } else {
+          return Column(
+            children: [
+              BannerCard(
+                backgroundColor: AppColors.secondaryColor,
+                accentColor: AppColors.primaryColor.withOpacity(0.2),
+                title: 'Upcomming Session',
+                subtitle: 'Sahana V, Msc in Clinical Psychology',
+                time: '7:30 PM - 8:30 PM',
+                buttonIcon: Icons.play_circle,
+                buttonText: 'Join Now',
+                textColor: AppColors.primaryColor,
+                mainTextColor: const Color(0xFF573926),
               ),
-            );
-          },
-        ),
-      ],
+              const SizedBox(
+                height: 26,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      _showDropdown(context);
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.transparent,
+                      ),
+                      padding: EdgeInsets.all(10.0),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 10,
+                        children: [
+                          Text(
+                            selectedValue,
+                            style: CustomStyle.defaultTextStyle.copyWith(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  PopupMenuButton<String>(
+                    icon: const Icon(Icons.sort),
+                    onSelected: choiceAction,
+                    itemBuilder: (BuildContext context) {
+                      return Constants.choices.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemCount: consultantList.length,
+                itemBuilder: (context, index) {
+                  Consultant list = consultantList[index];
+                  String formattedDate =
+                      DateFormat("d MMMM ''yy").format(list.datetime);
+                  String formattedStartTime =
+                      DateFormat("h:mm a").format(list.datetime);
+                  String formattedEndTime = DateFormat("h:mm a")
+                      .format(list.datetime.add(const Duration(hours: 1)));
+                  String formattedDateTimeRange =
+                      '$formattedStartTime - $formattedEndTime';
+
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    child: ConsultantItem(
+                      name: list.name,
+                      degree: list.degree,
+                      imageUrl: list.imageUrl,
+                      date: formattedDate,
+                      time: formattedDateTimeRange,
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        }
+      },
     );
   }
 
