@@ -13,7 +13,7 @@ class BannerCard extends StatelessWidget {
   final String buttonText;
   final IconData buttonIcon;
 
-  BannerCard({
+  const BannerCard({
     super.key,
     this.imagePath,
     this.time,

@@ -56,7 +56,7 @@ class _ConsultingScreenState extends State<ConsultingScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                         color: Colors.transparent,
                       ),
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
                         spacing: 10,
@@ -151,7 +151,7 @@ class _ConsultingScreenState extends State<ConsultingScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                         color: Colors.transparent,
                       ),
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
                         spacing: 10,
@@ -282,19 +282,19 @@ class _ConsultingScreenState extends State<ConsultingScreen> {
 }
 
 class Constants {
-  static const String FirstItem = 'Latest';
-  static const String SecondItem = 'Oldest';
+  static const String firstItem = 'Latest';
+  static const String secondItem = 'Oldest';
 
   static const List<String> choices = <String>[
-    FirstItem,
-    SecondItem,
+    firstItem,
+    secondItem,
   ];
 }
 
 void choiceAction(String choice) {
-  if (choice == Constants.FirstItem) {
+  if (choice == Constants.firstItem) {
     print('Latest clicked');
-  } else if (choice == Constants.SecondItem) {
+  } else if (choice == Constants.secondItem) {
     print('Oldest clicked');
   }
 }

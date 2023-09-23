@@ -183,7 +183,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Flexible(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   width: 30,
                   child: Image.asset(
                     'assets/images/quote.png',

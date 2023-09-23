@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wellness_app/helpers/formatting.dart';
 import 'package:wellness_app/models/category.dart';
 import 'package:wellness_app/models/community.dart';
-import 'package:wellness_app/theme/colors.dart';
 import 'package:wellness_app/theme/style.dart';
 import 'package:wellness_app/widgets/community_post.dart';
 import 'package:wellness_app/widgets/primary_button.dart';
@@ -15,8 +14,6 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
-  bool _isActive = false;
-
   @override
   Widget build(BuildContext context) {
     return Column(

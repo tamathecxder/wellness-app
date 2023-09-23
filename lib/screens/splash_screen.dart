@@ -16,18 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Tambahkan delay untuk simulasi splash screen
     Timer(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (_, __, ___) => const InitialScreen(),
           transitionsBuilder: (_, animation, __, child) {
-            const begin = Offset(1.0, 0.0);
-            const end = Offset.zero;
-            const curve = Curves.easeInOut;
-            var tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-            var offsetAnimation = animation.drive(tween);
             return FadeTransition(opacity: animation, child: child);
           },
         ),
